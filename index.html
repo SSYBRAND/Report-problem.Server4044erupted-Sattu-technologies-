@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Report Problems</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    form {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    select, textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        resize: none;
+    }
+
+    button {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    .elaborateBox {
+        display: none;
+    }
+</style>
+</head>
+<body>
+
+<h1>Report Problems</h1>
+
+<form id="reportForm">
+    <label for="issueType">Select Issue Type:</label>
+    <select id="issueType" name="issueType">
+        <option value="">Select</option>
+        <option value="Fee Section Problem">Fee Section Problem</option>
+        <option value="Live Class Issue">Live Class Issue</option>
+        <option value="Website Crash Problem">Website Crash Problem</option>
+        <!-- Add more options as needed -->
+    </select>
+
+    <div id="elaborateBox" class="elaborateBox">
+        <label for="elaborateDetails">Elaborate Your Problem:</label>
+        <textarea id="elaborateDetails" name="elaborateDetails" placeholder="Please elaborate your problem..."></textarea>
+    </div>
+
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+    document.getElementById('issueType').addEventListener('change', function() {
+        var selectedIssue = this.value;
+        var elaborateBox = document.getElementById('elaborateBox');
+        
+        if (selectedIssue) {
+            elaborateBox.style.display = 'block';
+        } else {
+            elaborateBox.style.display = 'none';
+        }
+    });
+    
+    document.getElementById('reportForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        var formData = {
+            issueType: document.getElementById('issueType').value,
+            elaborateDetails: document.getElementById('elaborateDetails').value,
+        };
+
+        var emailBody = "Issue Type: " + formData.issueType + "\n\n";
+        emailBody += "Elaborate Details: " + formData.elaborateDetails + "\n";
+
+        window.location.href = "mailto:ssybrand58@gmail.com?subject=Problem Report&body=" + encodeURIComponent(emailBody);
+    });
+</script>
+
+</body>
+</html>
